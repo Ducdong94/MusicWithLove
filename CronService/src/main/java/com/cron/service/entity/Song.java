@@ -1,25 +1,23 @@
 package com.cron.service.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 public class Song {
     @Id
-    private String id;
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String originId;
     private String title;
     private String code;
     private String artistsNames;
     private String link;
     private String thumbnail;
     private int duration;
-    @ManyToOne
-    private String source;
+    @OneToMany(mappedBy = "song", cascade = {CascadeType.ALL})
+    private List<Source> source;
     @NotNull
     private long time;
     @ManyToMany(mappedBy = "songs")
@@ -27,29 +25,35 @@ public class Song {
     @ManyToMany(mappedBy = "playlistSongs")
     List<Playlist> playlists;
 
-    public Song(String id, @NotNull String title, String code, String artistsNames, String link, String thumbnail, int duration, String source) {
-        this.id = id;
+    public Song(String originId, String title, String code, String artistsNames, String link, String thumbnail, int duration) {
+        this.originId = originId;
         this.title = title;
         this.code = code;
         this.artistsNames = artistsNames;
         this.link = link;
         this.thumbnail = thumbnail;
         this.duration = duration;
-        this.source = source;
         this.time = System.currentTimeMillis();
     }
 
     public Song() {
 
-
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getoriginId() {
+        return originId;
+    }
+
+    public void setoriginId(String originId) {
+        this.originId = originId;
     }
 
     public String getTitle() {
@@ -58,38 +62,6 @@ public class Song {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Playlist> getPlaylists() {
-        return playlists;
-    }
-
-    public void setPlaylists(List<Playlist> playlists) {
-        this.playlists = playlists;
     }
 
     public String getCode() {
@@ -130,5 +102,37 @@ public class Song {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public List<Source> getSource() {
+        return source;
+    }
+
+    public void setSource(List<Source> source) {
+        this.source = source;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
     }
 }

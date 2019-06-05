@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface PlaylistRepository extends CrudRepository<Playlist, String> {
 
     Playlist findByName(String name);
+    boolean existsByName(String name);
 }

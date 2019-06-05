@@ -1,26 +1,27 @@
 package com.cron.service.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Source {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
     private String quality;
     @NotNull
     private String path;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "song_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
+    @JoinColumn
     private Song song;
 
     public Source() {
+    }
+
+    public Source(String quality,String path) {
+        this.quality = quality;
+        this.path = path;
     }
 
     public long getId() {

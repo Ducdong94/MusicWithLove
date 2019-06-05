@@ -6,7 +6,9 @@ import java.util.List;
 @Entity
 public class Playlist {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String zingId;
     private String name;
     @ManyToMany
     @JoinTable(
@@ -18,17 +20,25 @@ public class Playlist {
     public Playlist() {
     }
 
-    public Playlist(String id, String name) {
-        this.id = id;
+    public Playlist(String zingId, String name) {
+        this.zingId = zingId;
         this.name = name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getZingId() {
+        return zingId;
+    }
+
+    public void setZingId(String zingId) {
+        this.zingId = zingId;
     }
 
     public String getName() {
