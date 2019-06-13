@@ -6,8 +6,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Source {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
     @NotNull
     private String quality;
     @NotNull
@@ -19,16 +18,17 @@ public class Source {
     public Source() {
     }
 
-    public Source(String quality,String path) {
+    public Source(String id, String quality, String path) {
+        this.id = id;
         this.quality = quality;
         this.path = path;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

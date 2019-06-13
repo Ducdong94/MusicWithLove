@@ -4,7 +4,12 @@ public class ZingConfig {
     //    Mobile version
     public static final String M_DOMAIN = "https://m.zingmp3.vn";
     public static final String M_API = "https://m.zingmp3.vn/xhr";
+    public static final String M_GET_SONG_API = "https://m.zingmp3.vn/xhr/media/get-source?type=audio&key=";
+    public static final String M_CHART = "https://m.zingmp3.vn/xhr/chart-realtime?chart=song&time=-1&count=100";
     public static final String M_TOP100 = "https://m.zingmp3.vn/top100/index.html";
+    public static final String M_TOPIC = "https://m.zingmp3.vn/chu-de";
+
+
     //    PC Version
     public static final String API_GET_SONG_DETAIL = "https://zingmp3.vn/api/song/get-streamings";
     public static final String API_GET_PLAYLIST_DETAIL = "https://zingmp3.vn/api/playlist/get-playlist-detail?";// params(id,ctime,sig,api_key)

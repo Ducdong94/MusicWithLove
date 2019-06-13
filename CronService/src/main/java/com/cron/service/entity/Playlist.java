@@ -1,44 +1,37 @@
 package com.cron.service.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Playlist {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String zingId;
+    private String id;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
-    @ManyToMany
-    @JoinTable(
-            name = "playlist_song",
-            joinColumns = @JoinColumn(name = "playlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "song_id"))
-    List<Song> playlistSongs;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "songPlaylist")
+    private Set<Song> playlistSong = new HashSet<>();
 
     public Playlist() {
     }
 
-    public Playlist(String zingId, String name) {
-        this.zingId = zingId;
+    public Playlist(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getZingId() {
-        return zingId;
-    }
-
-    public void setZingId(String zingId) {
-        this.zingId = zingId;
     }
 
     public String getName() {
@@ -49,11 +42,11 @@ public class Playlist {
         this.name = name;
     }
 
-    public List<Song> getPlaylistSongs() {
-        return playlistSongs;
+    public Set<Song> getPlaylistSong() {
+        return playlistSong;
     }
 
-    public void setPlaylistSongs(List<Song> playlistSongs) {
-        this.playlistSongs = playlistSongs;
+    public void setPlaylistSong(Set<Song> playlistSong) {
+        this.playlistSong = playlistSong;
     }
 }

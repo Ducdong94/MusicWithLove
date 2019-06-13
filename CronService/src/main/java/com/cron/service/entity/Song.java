@@ -2,31 +2,37 @@ package com.cron.service.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String originId;
+    private String id;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String title;
     private String code;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String artistsNames;
     private String link;
     private String thumbnail;
     private int duration;
-    @OneToMany(mappedBy = "song", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
     private List<Source> source;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "song_cate", joinColumns = {@JoinColumn(name = "song_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "category_id")})
+    private Set<Category> songCategories = new HashSet<Category>();
     @NotNull
     private long time;
-    @ManyToMany(mappedBy = "songs")
-    List<Category> categories;
-    @ManyToMany(mappedBy = "playlistSongs")
-    List<Playlist> playlists;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "song_playlist", joinColumns = {@JoinColumn(name = "song_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "playlist_id")})
+    private Set<Playlist> songPlaylist = new HashSet<Playlist>();
 
-    public Song(String originId, String title, String code, String artistsNames, String link, String thumbnail, int duration) {
-        this.originId = originId;
+    public Song(String id, String title, String code, String artistsNames, String link, String thumbnail, int duration) {
+        this.id = id;
         this.title = title;
         this.code = code;
         this.artistsNames = artistsNames;
@@ -38,22 +44,6 @@ public class Song {
 
     public Song() {
 
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getoriginId() {
-        return originId;
-    }
-
-    public void setoriginId(String originId) {
-        this.originId = originId;
     }
 
     public String getTitle() {
@@ -120,19 +110,27 @@ public class Song {
         this.time = time;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public String getId() {
+        return id;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public List<Playlist> getPlaylists() {
-        return playlists;
+    public Set<Category> getSongCategories() {
+        return songCategories;
     }
 
-    public void setPlaylists(List<Playlist> playlists) {
-        this.playlists = playlists;
+    public void setSongCategories(Set<Category> songCategories) {
+        this.songCategories = songCategories;
+    }
+
+    public Set<Playlist> getSongPlaylist() {
+        return songPlaylist;
+    }
+
+    public void setSongPlaylist(Set<Playlist> songPlaylist) {
+        this.songPlaylist = songPlaylist;
     }
 }
