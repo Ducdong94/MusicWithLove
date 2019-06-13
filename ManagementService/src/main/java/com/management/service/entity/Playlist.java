@@ -10,7 +10,7 @@ public class Playlist {
     private String name;
     @ManyToMany
     @JoinTable(
-            name = "playlist_song",
+            name = "song_playlist",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id"))
     List<Song> playlistSongs;
