@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Spotify Look Alike</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="page-wrapper">
+    <div class="main-container">
+        <div class="side-bar">
+            <div class="logo">
+                <a href="#" class="logo-link">Spotify Look Alike</a>
+                <p class="slogan">Music is our live</p>
+            </div>
+            <ul class="main-menu">
+                <li class="current"><a href="/">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="reigster.html">Register</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="footer">
+                <p>Copyright &copy; 2019</p>
+            </div>
+        </div>
+        <div class="main-body">
+            <div class="main-body-inner">
+                <h1><a th:href="'/playlist/'+${topvnid}">Nhạc Trẻ Hot</a></h1>
+                <div class="top-list" id="top100vn">
+                    <div th:if="${topvn.empty}">
+                        <h4>Không có bài hát</h4>
+                    </div>
+                    <a th:each="s : ${topvn}" class="top-list-item" href="#" th:title="${s.title}" hidden>
+                        <div th:style="'background-image:url(' + ${s.thumbnail} + ');'" class="cover"></div>
+                        <p th:text="${s.title}" class="title text-truncate"></p>
+                    </a>
+                    <button class="btn btn-link btn-top-vn-more text-light">Xem thêm >></button>
+                </div>
+
+                <h1 class="mt-5"><a th:href="'/playlist/'+${topusid}">Nhạc US/UK Hot</a></h1>
+                <div class="top-list" id="top100us">
+                    <div th:if="${topus.empty}">
+                        <h4>Không có bài hát</h4>
+                    </div>
+                    <a th:each="s : ${topus}" class="top-list-item" href="#" th:title="${s.title}" hidden>
+                        <div th:style="'background-image:url(' + ${s.thumbnail} + ');'" class="cover"></div>
+                        <p th:text="${s.title}" class="title text-truncate"></p>
+                    </a>
+                    <button class="btn btn-link btn-top-us-more text-light">Xem thêm >></button>
+                </div>
+
+                <h1 class="mt-5"><a href="#">EDM</a></h1>
+                <div class="top-list" id="topedm">
+                    <div th:if="${edms.empty}">
+                        <h4>Không có bài hát</h4>
+                    </div>
+                    <a th:each="s : ${edms}" class="top-list-item" href="#" th:title="${s.title}" hidden>
+                        <div th:style="'background-image:url(' + ${s.thumbnail} + ');'" class="cover"></div>
+                        <p th:text="${s.title}" class="title text-truncate"></p>
+                    </a>
+                    <button class="btn btn-link btn-edm-more text-light">Xem thêm >></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div id="main-player" class="main-player">
+    <div class="player-info">
+        <h3>Current song name here</h3>
+    </div>
+    <div class="player-controller">
+        <button class="previous-song">Prev</button>
+        <button class="play-song">Play</button>
+        <button class="next-song">Next</button>
+    </div>
+</div>
+<script src="assets/js/jquery-3.4.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+
+</html>
