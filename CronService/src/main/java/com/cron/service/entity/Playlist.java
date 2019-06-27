@@ -10,6 +10,8 @@ public class Playlist {
     private String id;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
+    @Column(columnDefinition = "NVARCHAR(255)")
+    private String image;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -40,6 +42,14 @@ public class Playlist {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Set<Song> getPlaylistSong() {

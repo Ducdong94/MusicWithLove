@@ -30,7 +30,7 @@ public class ZingController {
     @Autowired
     SongRepository songRepository;
 
-    @Scheduled(fixedDelay = 86400000)
+//    @Scheduled(fixedDelay = 86400000)
     public void getZingChartMobileScheduler() {
         System.out.println("Start crawl zingChartMobileScheduler ZingMp3 at " + new Date());
         try {
@@ -57,7 +57,7 @@ public class ZingController {
         }
     }
 
-    @Scheduled(fixedDelay = 86400000)
+//    @Scheduled(fixedDelay = 86400000)
     public void getTopicMobileScheduler() {
         System.out.println("Start crawl topicMobileScheduler ZingMp3 at " + new Date());
         try {
@@ -104,7 +104,7 @@ public class ZingController {
 
     }
 
-    @Scheduled(fixedDelay = 86400000)
+//    @Scheduled(fixedDelay = 86400000)
     public void getTop100MobileScheduler() {
         System.out.println("Start crawl top100MobileScheduler ZingMp3 at " + new Date());
 
